@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ledCube</class>
+ <widget class="QMainWindow" name="ledCube">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>954</width>
+    <height>587</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="LedsSimulator" name="wdgLedCube" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextEdit" name="arduinoOutput"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>954</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuCube">
+    <property name="title">
+     <string>Cube</string>
+    </property>
+    <addaction name="actionConfigure"/>
+   </widget>
+   <widget class="QMenu" name="menuScenario">
+    <property name="title">
+     <string>scenario</string>
+    </property>
+    <widget class="QMenu" name="menuNew">
+     <property name="title">
+      <string>new</string>
+     </property>
+     <widget class="QMenu" name="menuPredefined">
+      <property name="title">
+       <string>predefined</string>
+      </property>
+      <addaction name="actionMoving_plane"/>
+      <addaction name="actionWaves"/>
+      <addaction name="actionSquare_random_suspended"/>
+      <addaction name="actionRandom"/>
+     </widget>
+     <addaction name="menuPredefined"/>
+     <addaction name="actionCustom"/>
+    </widget>
+    <addaction name="menuNew"/>
+    <addaction name="actionOpen"/>
+   </widget>
+   <widget class="QMenu" name="menuExternal">
+    <property name="title">
+     <string>external</string>
+    </property>
+    <addaction name="actionArduino"/>
+    <addaction name="actionSystem"/>
+   </widget>
+   <widget class="QMenu" name="menuArduino">
+    <property name="title">
+     <string>arduino</string>
+    </property>
+    <addaction name="actionDisconnect"/>
+    <addaction name="actionShow_log"/>
+   </widget>
+   <addaction name="menuCube"/>
+   <addaction name="menuScenario"/>
+   <addaction name="menuExternal"/>
+   <addaction name="menuArduino"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionConfigure">
+   <property name="text">
+    <string>configure</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>open</string>
+   </property>
+  </action>
+  <action name="actionArduino">
+   <property name="text">
+    <string>Arduino</string>
+   </property>
+  </action>
+  <action name="actionSystem">
+   <property name="text">
+    <string>system</string>
+   </property>
+  </action>
+  <action name="actionCustom">
+   <property name="text">
+    <string>custom</string>
+   </property>
+  </action>
+  <action name="actionMoving_plane">
+   <property name="text">
+    <string>moving plane</string>
+   </property>
+  </action>
+  <action name="actionWaves">
+   <property name="text">
+    <string>waves</string>
+   </property>
+  </action>
+  <action name="actionSquare_random_suspended">
+   <property name="text">
+    <string>square + random suspended</string>
+   </property>
+  </action>
+  <action name="actionRandom">
+   <property name="text">
+    <string>random</string>
+   </property>
+  </action>
+  <action name="actionDisconnect">
+   <property name="text">
+    <string>disconnect</string>
+   </property>
+  </action>
+  <action name="actionShow_log">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>show log</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LedsSimulator</class>
+   <extends>QWidget</extends>
+   <header>LedsSimulator.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,20 @@
+GitHub/LED-matrixes-controller-programmer
+https://github.com/Bntdumas/LED-matrixes-controller-programmer
+----------------------------------------------
+
+The computer part is able to simulate a led matrix (in 2 or 3 dimensions) and create some led scenarios. It can communicate with an arduino.
+
+The arduino (+ schematics) part is the hardware used for my early tests.
+
+More explanations to come.
+
+
+Arduino project needs library cmdMessenger:
+http://arduino.cc/playground/Code/CmdMessenger
+
+LibCommArduino Qt library need QExtSerialPort library:
+http://code.google.com/p/qextserialport/
+
+------------------
+Benoit Dumas
+bntdumas@gmail.com
