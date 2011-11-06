@@ -4,8 +4,8 @@
 #include <QThread>
 #include <QInputDialog>
 #include <QMap>
-#include <qextserialport.h>
-#include <qextserialenumerator.h>
+#include "./qextserialport/src/qextserialport.h"
+#include "./qextserialport/src/qextserialenumerator.h"
 
 #include "portSettings.h"
 

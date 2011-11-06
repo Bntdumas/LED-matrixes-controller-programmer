@@ -19,7 +19,7 @@ HEADERS += LibCommArduino.h\
     portSettings.h
 
 
-LIBS += /lib/libqextserialport.so
+LIBS += ./qextserialport/src/build/libqextserialport.so
 
 FORMS += \
     portSettings.ui
