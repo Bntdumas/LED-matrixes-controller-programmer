@@ -1,12 +1,19 @@
 #include <CmdMessenger.h>
 #include <Streaming.h>
 
-boolean array[8][8];
+//cube size
+#define CUBE_X 3
+#define CUBE_Y 3
+#define CUBE_Z 3
+
+
+boolean array[CUBE_X][CUBE_Y][CUBE_Z];
 char field_separator = ',';
 char command_separator = ';';
 bool frameReady = true;
 
 CmdMessenger cmdMessenger = CmdMessenger(Serial, field_separator, command_separator);
+
 
 // Commands we send from the Arduino to be received on the PC
 enum
@@ -40,25 +47,37 @@ void  pictureStart()
 
 void  pictureData()
 {
-  // Message data is any ASCII bytes (0-255 value). But can't contain the field
-  // separator, command separator chars you decide (eg ',' and ';')
-  //cmdMessenger.sendCmd(kACK,"picture data");
+
   bool first = true;
+  bool second = false;
+  bool third = false;
   int x= 0;
   int y= 0;
+  int z= 0;
   while ( cmdMessenger.available() )
   {
     char buf[20] = { '\0' };
     cmdMessenger.copyString(buf, 20);
     if(buf[0])
 	{
-        //cmdMessenger.sendCmd(kACK, buf);
-		if (first) x = toInt(buf);
-		else y = toInt(buf);
+
+		if (first)
+		{
+		    x = toInt(buf);
+		    first = false;
+            second = true;
+		}
+		else if(second)
+		{
+		    y = toInt(buf);
+		    first = false;
+            second = false;
+            third = true;
+		}
+		else if (third) z = toInt(buf);
 	}
-	first = false;
   }
-  array[y][x] = true;
+  array[y][x][z] = true;
 }
 
 void  pictureEnd()
@@ -103,19 +122,18 @@ void setup()
   cmdMessenger.print_LF_CR();   // Make output more readable whilst debugging in Arduino Serial Monitor
   
   // Attach default / generic callback methods
-  cmdMessenger.attach(kARDUINO_READY, arduino_ready);
-  cmdMessenger.attach(unknownCmd);
+  //cmdMessenger.attach(kARDUINO_READY, arduino_ready);
+  //cmdMessenger.attach(unknownCmd);
 
   // Attach my application's user-defined callback methods
   attach_callbacks(messengerCallbacks);
-
-  arduino_ready();
 }
 
 void clear(){
-  for(int i = 0; i < 8; i++)
-    for(int j = 0; j < 8; j++)
-      array[i][j] = false;
+  for(int x = 0; x < CUBE_X; x++)
+    for(int y = 0; y < CUBE_Y; y++)
+     for(int z = 0; z < CUBE_Z; z++)
+      array[x][y][z] = false;
 }
 
 int toInt(char *str){
@@ -135,16 +153,28 @@ void low(){
 
 void drawFrame()
 {
-	for(int y = 0; y < 8; y++)
+	for(int z = 0; z < CUBE_Z; z++)
+	for(int y = 0; y < CUBE_Y; y++)
 	{
-		for(int x = 0; x < 8; x++)
+		for(int x = 0; x < CUBE_X; x++)
 		{
-			if (array[x][y] == true)
-				switchLed(x,y);
+			if (array[x][y][z] == true)
+				switchLed(x,y,z);
 		}
 	}
 }
 
+void switchLed(int x, int y, int z)
+{
+			
+	//first find led from 0 to 9 corresponding
+	digitalWrite((x*y)+2, HIGH);
+	
+	digitalWrite(z+11, HIGH);
+			
+
+}
+/*
 void switchLed(int x, int y)
 {
 			  
@@ -160,6 +190,9 @@ void switchLed(int x, int y)
 	  //save
 	  latch(11);
 }
+*/
+
+
 
 void loop()
 {

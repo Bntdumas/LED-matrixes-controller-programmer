@@ -14,7 +14,8 @@ TEMPLATE = app
 
 INCLUDEPATH += ../libCommArduino/
 
-LIBS += /home/benoit/Qt_Perso/libCommArduino-build-desktop/libCommArduino.so.1.0.0
+LIBS += ../libCommArduino/libCommArduino.so \
+../libCommArduino/qextserialport/src/build/libqextserialport.so
 
 SOURCES += main.cpp \
     threadLedCube.cpp \
